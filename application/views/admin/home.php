@@ -162,6 +162,15 @@
 
 </section>
 
+<section class="section-p1">
+    <div class="preloader">
+        <div class="loading">
+            <img src="<?= base_url('assets/image/loading.gif'); ?>" width="120">
+            <p><strong>Harap Tunggu</strong></p>
+        </div>
+    </div>
+</section>
+
 <script>
     let arrow = document.querySelectorAll(".arrow");
     for (var i = 0; i < arrow.length; i++) {
@@ -246,6 +255,13 @@
         });
 
     <?php } ?>
+</script>
+
+<!-- javascript loading -->
+<script>
+    $(document).ready(function() {
+        $(".preloader").fadeOut();
+    })
 </script>
 
 <!-- <script>

@@ -86,7 +86,7 @@
 
     <div class="home-content">
         <i class='bx bx-menu'></i>
-        <span class="text"><i class='bx bxs-home'></i> Home</span>
+        <span class="text"><i class='bx bxs-virus'></i> Tambah Data Vaksinasi</span>
     </div>
 
     <main>
@@ -173,6 +173,15 @@
     </main>
 </section>
 
+<section class="section-p1">
+    <div class="preloader">
+        <div class="loading">
+            <img src="<?= base_url('assets/image/loading.gif'); ?>" width="120">
+            <p><strong>Harap Tunggu</strong></p>
+        </div>
+    </div>
+</section>
+
 <script>
     $(document).ready(function() {
         $("#id_kelurahan").hide();
@@ -250,4 +259,11 @@
     sidebarBtn.addEventListener("click", () => {
         sidebar.classList.toggle("close");
     });
+</script>
+
+<!-- javascript loading -->
+<script>
+    $(document).ready(function() {
+        $(".preloader").fadeOut();
+    })
 </script>

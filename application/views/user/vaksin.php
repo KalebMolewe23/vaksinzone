@@ -23,6 +23,15 @@
 </section>
 
 <section class="section-p1">
+    <div class="preloader">
+        <div class="loading">
+            <img src="<?= base_url('assets/image/loading.gif'); ?>" width="120">
+            <p><strong>Harap Tunggu</strong></p>
+        </div>
+    </div>
+</section>
+
+<section class="section-p1">
     <center>
         <h4><strong>Informasi Data Vaksinasi Kecamatan Lowokwaru </strong></h4>
     </center><br>
@@ -196,4 +205,10 @@
             nav.classList.remove('active');
         })
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(".preloader").fadeOut();
+    })
 </script>

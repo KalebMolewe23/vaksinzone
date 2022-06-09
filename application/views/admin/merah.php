@@ -86,38 +86,13 @@
 
     <div class="home-content">
         <i class='bx bx-menu'></i>
-        <span class="text"><i class='bx bxs-home'></i> Home</span>
+        <span class="text"><i class='bx bxs-map-pin'></i> Zona Merah</span>
     </div>
 
     <main>
         <div class="container">
 
             <br>
-
-            <center>
-                <h4><strong>Data Zona Merah</strong></h4>
-            </center><br>
-
-            <div class="row">
-                <div id="piechart" style="width: 700px; height: 400px;"></div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong>Persentase Vaksinasi Zona Merah</strong>
-                        </div>
-                        <div class="card-body">
-                            <?php $sum = 0;
-                            foreach ($vaksin2 as $inv) : ?>
-                            <?php endforeach; ?>
-                            <center><?= $sum += round(($inv->totals / $inv->total) * 100, 0); ?>%</center>
-                            <?php $nilaivaksin1 = $sum; ?>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: <?= $nilaivaksin1; ?>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <center>
                 <h3><strong>Data Daerah Kec. Lowokwaru</strong></h3>
@@ -155,41 +130,19 @@
                 <div class="map-wrapper" id="map" style="width: 400px; height: 400px;"></div>
             </div>
 
-            <br>
-            <center>
-                <h4><strong>Zona Vaksinasi</strong></h4>
-            </center><br>
-
-            <div class="row">
-                &nbsp;&nbsp;&nbsp;&nbsp;<div class="card bg-dark text-black" style="width:30%">
-                    <img class="card-img" src="<?= base_url("/assets/user/img/zonahijauh.jpg"); ?>" alt="Card image" style="width:100%">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title"><strong>Zona Hijau</strong></h5>
-                        <p class="card-text"><strong>16%</strong></p>
-                        <a href="<?= base_url("admin/zona_hijau"); ?>"><button type="button" class="btn btn-primary"><i class="fas fa-hand-pointer"></i> Pilih</button></a>
-                    </div>
-                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="card bg-dark text-black" style="width:30%">
-                    <img class="card-img" src="<?= base_url("/assets/user/img/zonakuning.jpg"); ?>" alt="Card image" style="width:100%">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title"><strong>Zona Kuning</strong></h5>
-                        <p class="card-text"><strong>58%</strong></p>
-                        <a href="<?= base_url("admin/zona_kuning"); ?>"><button type="button" class="btn btn-primary"><i class="fas fa-hand-pointer"></i> Pilih</button></a>
-                    </div>
-                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="card bg-dark text-white" style="width:30%">
-                    <img class="card-img" src="<?= base_url("/assets/user/img/zonamerah.jpg"); ?>" alt="Card image" style="width:100%">
-                    <div class="card-img-overlay">
-                        <h5 class="card-title"><strong>Zona Merah</strong></h5>
-                        <p class="card-text"><strong>25%</strong></p>
-                        <a href="<?= base_url("admin/zona_merah"); ?>"><button type="button" class="btn btn-primary"><i class="fas fa-hand-pointer"></i> Pilih</button></a>
-                    </div>
-                </div>
-
-            </div><br>
-
         </div>
+
     </main>
+
+</section>
+
+<section class="section-p1">
+    <div class="preloader">
+        <div class="loading">
+            <img src="<?= base_url('assets/image/loading.gif'); ?>" width="120">
+            <p><strong>Harap Tunggu</strong></p>
+        </div>
+    </div>
 </section>
 
 <script src="<?= base_url("/assets/user/js/script.js"); ?>"></script>
@@ -250,6 +203,29 @@
 
         chart.draw(data, options);
     }
+</script>
+
+<script>
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+            let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    });
+</script>
+
+<!-- javascript loading -->
+<script>
+    $(document).ready(function() {
+        $(".preloader").fadeOut();
+    })
 </script>
 
 <script>

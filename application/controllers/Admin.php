@@ -320,7 +320,6 @@ class Admin extends CI_Controller
         $data['title'] = 'Home';
         $wilayah['lowokwaru'] = $this->m_daerah->zmerah();
         $wilayah['vaksin'] = $this->m_daerah->graph3();
-        $wilayah['vaksin2'] = $this->m_daerah->total_zmerah()->result();
         $this->load->view('admin/templates/header', $data);
         $this->load->view('admin/merah', $wilayah);
         $this->load->view('admin/templates/footer');

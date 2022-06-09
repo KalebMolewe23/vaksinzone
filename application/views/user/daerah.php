@@ -22,6 +22,15 @@
     <img class="mySlides" src="<?= base_url("assets/image/mojolangu.png") ?>" width="1200px">
 </section>
 
+<section class="section-p1">
+    <div class="preloader">
+        <div class="loading">
+            <img src="<?= base_url('assets/image/loading.gif'); ?>" width="120">
+            <p><strong>Harap Tunggu</strong></p>
+        </div>
+    </div>
+</section>
+
 <!-- MAIN -->
 <section class="section-p1">
     <center>
@@ -99,4 +108,10 @@
             nav.classList.remove('active');
         })
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(".preloader").fadeOut();
+    })
 </script>

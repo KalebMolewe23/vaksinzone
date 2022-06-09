@@ -27,7 +27,7 @@
         <div class="col-sm">
             <div class="card">
                 <div class="card-header">
-                    <strong>Total Vaksinasi Dosis 1ssss</strong>
+                    <strong>Total Vaksinasi Dosis 1</strong>
                 </div>
                 <div class="card-body">
                     <?php $sum = 0;
@@ -74,6 +74,15 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-p1">
+    <div class="preloader">
+        <div class="loading">
+            <img src="<?= base_url('assets/image/loading.gif'); ?>" width="120">
+            <p><strong>Harap Tunggu</strong></p>
         </div>
     </div>
 </section>
@@ -400,6 +409,13 @@
             nav.classList.remove('active');
         })
     }
+</script>
+
+<!-- javascript loading -->
+<script>
+    $(document).ready(function() {
+        $(".preloader").fadeOut();
+    })
 </script>
 
 <!-- <script>
