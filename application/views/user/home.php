@@ -27,7 +27,7 @@
         <div class="col-sm">
             <div class="card">
                 <div class="card-header">
-                    <strong>Total Vaksinasi Dosis 1</strong>
+                    <strong>Total Vaksinasi Dosis 1ssss</strong>
                 </div>
                 <div class="card-body">
                     <?php $sum = 0;
