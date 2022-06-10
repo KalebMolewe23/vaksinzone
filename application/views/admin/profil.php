@@ -85,54 +85,60 @@
 
     <div class="home-content">
         <i class='bx bx-menu'></i>
-        <span class="text"><i class='bx bxs-map-pin'></i> Zona Merah</span>
+        <span class="text"><i class='bx bxs-user-badge'></i> Data Puskesmas</span>
     </div>
 
     <main>
-        <div class="container">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    <center>No.</center>
+                </th>
+                <th>
+                    <center>Nama User</center>
+                </th>
+                <th>
+                    <center>Role</center>
+                </th>
+                <th>
+                    <center>Email</center>
+                </th>
+                <th>
+                    <center>Alamat</center>
+                </th>
+                <th>
+                    <center>Kecamatan</center>
+                </th>
+                <th>
+                    <center>Kelurahan</center>
+                </th>
+                <th>
+                    <center>Kode Pos</center>
+                </th>
+                <!-- <th width="200px">
+                    <center>Action</center>
+                </th> -->
+            </tr>
 
-            <br>
-
-            <center>
-                <h3><strong>Data Daerah Kec. Lowokwaru</strong></h3>
-            </center>
-            <br>
-            <table class="table table-bordered table_hover table-striped">
+            <?php $no = 1;
+            foreach ($user as $inv) : ?>
                 <tr>
-                    <th>
-                        <center>No.</center>
-                    </th>
-                    <th>
-                        <center>Nama Puskesmas</center>
-                    </th>
-                    <th>
-                        <center>Nama Kelurahan</center>
-                    </th>
+                    <td align="center"><?= $no++ ?></td>
+                    <td align="center"><?= $inv->nama_user ?></td>
+                    <td align="center"><?= $inv->role ?></td>
+                    <td align="center"><?= $inv->email ?></td>
+                    <td align="center"><?= $inv->alamat ?></td>
+                    <td align="center"><?= $inv->nama_kecamatan ?></td>
+                    <td align="center"><?= $inv->nama_kelurahan ?></td>
+                    <td align="center"><?= $inv->kode_pos ?></td>
+                    <!-- <td align="center">
+                        <?= anchor('admin/editdaerah/' . $inv->id_info, '<div class="btn btn-primary btn-sm"><i class="bx bx-edit" ></i> Ubah</div>') ?>
+                        <?= anchor('admin/deletedaerah/' . $inv->id_info, '<div class="btn btn-danger btn-sm"><i class="bx bxs-trash-alt"></i> Hapus</div>') ?>
+                    </td> -->
                 </tr>
-
-                <?php $no = 1;
-                foreach ($lowokwaru as $inv) : ?>
-                    <tr>
-                        <td align="center"><?= $no++ ?></td>
-                        <td align="center"><?= $inv->nama_puskesmas ?></td>
-                        <td align="center">Kel. <?= $inv->nama_kelurahan ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table><br>
-
-            <center>
-                <h4><strong>Peta Vaksinasi</strong></h4>
-            </center><br>
-
-            <div class="row">
-                <div id="piechart" style="width: 700px; height: 400px;"></div>
-                <div class="map-wrapper" id="map" style="width: 400px; height: 400px;"></div>
-            </div>
-
-        </div>
-
+            <?php endforeach; ?>
+        </table>
     </main>
-
 </section>
 
 <section class="section-p1">
@@ -143,66 +149,6 @@
         </div>
     </div>
 </section>
-
-<script src="<?= base_url("/assets/user/js/script.js"); ?>"></script>
-
-<script>
-    var map = L.map('map').setView([-7.944518, 112.619456], 13);
-
-    var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 18,
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1
-    }).addTo(map);
-
-    <?php foreach ($lowokwaru as $data => $value) { ?>
-        $.getJSON("<?= base_url('assets/maps/' . $value->geojson) ?>", function(data) {
-            geoLayer = L.geoJson(data, {
-                style: function(feater) {
-                    return {
-                        opacity: 0.5,
-                        color: '#FF0000',
-                        fillcolor: '#FF0000',
-                    }
-                },
-            }).addTo(map);
-
-            geoLayer.eachLayer(function(layer) {
-                layer.bindPopup("Kel. <?= $value->nama_kelurahan ?><br>Vaksin -1: <?= number_format($value->pers_vaksin_gel1) ?>%<br>Vaksin -2: <?= number_format($value->pers_vaksin_gel2) ?>%<br>Vaksin -3: <?= number_format($value->pers_vaksin_gel3) ?>%");
-            });
-        });
-
-    <?php } ?>
-</script>
-
-<script>
-    google.charts.load('current', {
-        'packages': ['corechart']
-    });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Zona', 'Total'],
-            <?php
-            foreach ($vaksin as $v) {
-                echo "['" . '' . "'," . $v['total'] . "],";
-            }
-            ?>
-        ]);
-        var options = {
-            title: 'Data Merah Belum Vaksin | Data Biru Sudah Vaksin',
-            is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-    }
-</script>
 
 <script>
     let arrow = document.querySelectorAll(".arrow");
@@ -225,20 +171,4 @@
     $(document).ready(function() {
         $(".preloader").fadeOut();
     })
-</script>
-
-<script>
-    let arrow = document.querySelectorAll(".arrow");
-    for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e) => {
-            let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-            arrowParent.classList.toggle("showMenu");
-        });
-    }
-    let sidebar = document.querySelector(".sidebar");
-    let sidebarBtn = document.querySelector(".bx-menu");
-    console.log(sidebarBtn);
-    sidebarBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("close");
-    });
 </script>

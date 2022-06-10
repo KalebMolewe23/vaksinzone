@@ -458,5 +458,18 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/footer');
     }
 
+    public function profil(){
+
+        $this->db->join('kelurahan', 'kelurahan.id_kelurahan = user.id_kelurahan');
+        $this->db->join('kecamatan', 'kecamatan.id_kecamatan = user.id_kecamatan');
+        $this->db->join('user_role', 'user_role.id = user.role_id');
+        $datauser['user'] = $this->db->get('user')->result();
+
+        $data['title'] = 'Data Profile';
+        $this->load->view('admin/templates/header', $data);
+        $this->load->view('admin/profil', $datauser);
+        $this->load->view('admin/templates/footer');
+    }
+
     
 }

@@ -54,15 +54,14 @@
         <li>
             <div class="iocn-link">
                 <a href="#">
-                    <i class='bx bxs-user-account'></i>
-                    <span class="link_name">Data User</span>
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Setting</span>
                 </a>
                 <i class='bx bxs-chevron-down arrow'></i>
             </div>
             <ul class="sub-menu">
-                <li><a class="link_name" href="#">Data Zona</a></li>
-                <li><a href="<?= base_url("admin/data_admin"); ?>">Admin</a></li>
-                <li><a href="<?= base_url("admin/data_user"); ?>">User</a></li>
+                <li><a class="link_name" href="#">Setting</a></li>
+                <li><a href="<?= base_url("admin/logo"); ?>">Logo</a></li>
             </ul>
         </li>
         <li>
@@ -73,7 +72,7 @@
                 <div class="name-job">
                     <div class="profile_name"></div>
                     <div class="job"><a href="<?= base_url("admin/profil"); ?>">
-                            <font color='#ffffff'>DATA PROGRAMMER</font>
+                            <font color='#ffffff'>Data User</font>
                         </a></div>
                 </div>
                 <a href="<?= base_url("auth/logout"); ?>"><i class='bx bx-log-out'></i></a>
