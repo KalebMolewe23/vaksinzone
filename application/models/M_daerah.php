@@ -203,4 +203,8 @@ class M_daerah extends CI_Model
         return $result;
     }
 
+    public function tambah_logo($data){
+        $this->db->update('logo',$data);
+    }
+
 }

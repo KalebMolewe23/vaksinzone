@@ -16,6 +16,8 @@ class User extends CI_Controller {
         
         $data['title'] = 'Home';
 
+        $wilayah['image'] = $this->db->get('logo')->result();
+
         $wilayah['vaksin'] = $this->m_daerah->total_vaksin1()->result();
         $wilayah['vaksin1'] = $this->m_daerah->total_vaksin2()->result();
         $wilayah['vaksin2'] = $this->m_daerah->total_vaksin3()->result();
@@ -44,6 +46,8 @@ class User extends CI_Controller {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
+        $wilayah['image'] = $this->db->get('logo')->result();
+
         $data['title'] = 'Info Vaksinasi';
         $wilayah['lowokwaru'] = $this->m_daerah->data_puskesmas();
         $this->load->view('user/templates/header', $data);
@@ -54,6 +58,8 @@ class User extends CI_Controller {
     public function tampilan_data(){
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
+
+        $wilayah['image'] = $this->db->get('logo')->result();
 
         $data['title'] = 'Data Daerah Vaksinasi';
         $wilayah['lowokwaru'] = $this->m_daerah->zhijau();
@@ -67,6 +73,8 @@ class User extends CI_Controller {
     public function about(){
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
+
+        $wilayah['image'] = $this->db->get('logo')->result();
 
         $data['title'] = 'Tentang Website';
         $this->load->view('user/templates/header', $data);

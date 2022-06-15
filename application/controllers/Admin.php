@@ -471,5 +471,49 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/footer');
     }
 
+    public function logo(){
+        $data['title'] = 'Setting Logo';
+
+        $data_file['image'] = $this->db->get('logo')->result();
+
+        $this->load->view('admin/templates/header', $data);
+        $this->load->view('admin/logo', $data_file);
+        $this->load->view('admin/templates/footer');
+    }
+
+    public function tambah_logo(){
+        $nama_logo = $_FILES['nama_logo']['name'];
+        $logo_title = $_FILES['logo_title']['name'];
+        if($nama_logo){
+            $config['upload_path'] = './assets/logo/';
+            $config['allowed_types'] = 'jpg|jpeg|png|gif';
+            $config['max_size'] = 1000; //satuan MB
+            $config['max_width'] = 1280; //pixel
+            $config['max_height'] = 300; //pixel
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('nama_logo')) {
+                $uploaded = $this->upload->data();
+                $logo_name = $uploaded['file_name'];
+                // var_dump($logo_name);
+                // die();
+                $data = [
+                    'nama_logo' => $logo_name,
+                    'date_created' => time()
+                ];
+
+                $this->m_daerah->tambah_logo($data);
+                $this->session->set_flashdata('status', 'Data Berhasil Disimpan');
+                redirect('admin/logo');
+            }else{
+                $this->session->set_flashdata('status', $this->upload->display_errors());
+                redirect('admin/logo');
+            }
+        }else{
+            $this->session->set_flashdata('status','tidak ada gambar yang di upload');
+            redirect('admin/logo');
+        }
+
+    }
+
     
 }

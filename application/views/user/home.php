@@ -1,5 +1,7 @@
 <section id="header">
-    <a href="<?= base_url("user"); ?>"><img src="<?= base_url("assets/image/vaksinzonelogo.png") ?>" class="logo" alt="" width="150px"></a>
+    <?php foreach ($image as $img) : ?>
+        <a href="<?= base_url("user"); ?>"><img src="<?= base_url("assets/logo/".$img->nama_logo) ?>" class="logo" alt="" width="150px"></a>
+    <?php endforeach; ?>
 
     <div>
         <ul id="navbar">
