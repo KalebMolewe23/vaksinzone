@@ -65,8 +65,6 @@ class Auth extends CI_Controller
     public function register()
     {
         $this->form_validation->set_rules('nama_user', 'nama_user', 'required|trim');
-        $this->form_validation->set_rules('alamat', 'alamat', 'required|trim');
-        $this->form_validation->set_rules('kode_pos', 'kode_pos', 'required|trim');
         $this->form_validation->set_rules('kontak', 'kontak', 'required|trim|is_unique[user.kontak]', [
             'is_unique' => 'Nomor Sudah Terdaftar!!!']);
         $this->form_validation->set_rules('email', 'email', 'required|trim|valid_email|is_unique[user.email]', [
@@ -86,11 +84,7 @@ class Auth extends CI_Controller
             $this->load->view('auth/templates/footer');
         } else {
             $datauser = [
-                'id_kecamatan' => $this->input->post('id_kecamatan'),
-                'id_kelurahan' => $this->input->post('id_kelurahan'),
                 'nama_user' => htmlspecialchars($this->input->post('nama_user', true)),
-                'alamat' => htmlspecialchars($this->input->post('alamat', true)),
-                'kode_pos' => htmlspecialchars($this->input->post('kode_pos', true)),
                 'kontak' => htmlspecialchars($this->input->post('kontak', true)),
                 'email' => htmlspecialchars($this->input->post('email', true)),
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),

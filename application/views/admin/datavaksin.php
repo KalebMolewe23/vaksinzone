@@ -99,62 +99,65 @@
 
             <center><?= $this->session->flashdata('message') ?></center><br>
 
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>
-                        <center>No.</center>
-                    </th>
-                    <th>
-                        <center>Kelurahan</center>
-                    </th>
-                    <th>
-                        <center>Puskesmas</center>
-                    </th>
-                    <th>
-                        <center>jumlah penduduk</center>
-                    </th>
-                    <th>
-                        <center>Belum Vaksin G-1</center>
-                    </th>
-                    <th>
-                        <center>Persentase G-1</center>
-                    </th>
-                    <th>
-                        <center>Belum Vaksin G-2</center>
-                    </th>
-                    <th>
-                        <center>Persentase G-2</center>
-                    </th>
-                    <th>
-                        <center>Belum Vaksin G-3</center>
-                    </th>
-                    <th>
-                        <center>Persentase G-3</center>
-                    </th>
-                    <th width="200px">
-                        <center>Action</center>
-                    </th>
-                </tr>
-
-                <?php $no = 1;
-                foreach ($vaksin as $inv) : ?>
+            <table class="table table-bordered table-striped" id="datatable">
+                <thead>
                     <tr>
-                        <td align="center"><?= $no++ ?></td>
-                        <td align="center"><?= $inv->nama_kelurahan ?></td>
-                        <td align="center"><?= $inv->nama_puskesmas ?></td>
-                        <td align="center"><?= $inv->jumlah_penduduk ?></td>
-                        <td align="center"><?= $inv->bvaksin_gel1 ?></td>
-                        <td align="center"><?= number_format($inv->pers_vaksin_gel1) ?>%</td>
-                        <td align="center"><?= $inv->bvaksin_gel2 ?></td>
-                        <td align="center"><?= number_format($inv->pers_vaksin_gel2) ?>%</td>
-                        <td align="center"><?= $inv->bvaksin_gel3 ?></td>
-                        <td align="center"><?= number_format($inv->pers_vaksin_gel3) ?>%</td>
-                        <td align="center">
-                            <?= anchor('admin/editvaksin/' . $inv->id_vaksin, '<div class="btn btn-primary btn-sm"><i class="bx bx-edit" ></i> Ubah</div>') ?>
-                            <?= anchor('admin/deletedatavaksin/' . $inv->id_vaksin, '<div class="btn btn-danger btn-sm"><i class="bx bxs-trash-alt"></i> Hapus</div>') ?>
-                        </td>
+                        <th>
+                            <center>No.</center>
+                        </th>
+                        <th>
+                            <center>Kelurahan</center>
+                        </th>
+                        <th>
+                            <center>Puskesmas</center>
+                        </th>
+                        <th>
+                            <center>jumlah penduduk</center>
+                        </th>
+                        <th>
+                            <center>Belum Vaksin G-1</center>
+                        </th>
+                        <th>
+                            <center>Persentase G-1</center>
+                        </th>
+                        <th>
+                            <center>Belum Vaksin G-2</center>
+                        </th>
+                        <th>
+                            <center>Persentase G-2</center>
+                        </th>
+                        <th>
+                            <center>Belum Vaksin G-3</center>
+                        </th>
+                        <th>
+                            <center>Persentase G-3</center>
+                        </th>
+                        <th width="200px">
+                            <center>Action</center>
+                        </th>
                     </tr>
-                <?php endforeach; ?>
+                </thead>
+                <tbody>
+                    <?php $no = 1;
+                    foreach ($vaksin as $inv) : ?>
+                        <tr>
+                            <td align="center"><?= $no++ ?></td>
+                            <td align="center"><?= $inv->nama_kelurahan ?></td>
+                            <td align="center"><?= $inv->nama_puskesmas ?></td>
+                            <td align="center"><?= $inv->jumlah_penduduk ?></td>
+                            <td align="center"><?= $inv->bvaksin_gel1 ?></td>
+                            <td align="center"><?= number_format($inv->pers_vaksin_gel1) ?>%</td>
+                            <td align="center"><?= $inv->bvaksin_gel2 ?></td>
+                            <td align="center"><?= number_format($inv->pers_vaksin_gel2) ?>%</td>
+                            <td align="center"><?= $inv->bvaksin_gel3 ?></td>
+                            <td align="center"><?= number_format($inv->pers_vaksin_gel3) ?>%</td>
+                            <td align="center">
+                                <?= anchor('admin/editvaksin/' . $inv->id_vaksin, '<div class="btn btn-primary btn-sm"><i class="bx bx-edit" ></i> Ubah</div>') ?>
+                                <?= anchor('admin/deletedatavaksin/' . $inv->id_vaksin, '<div class="btn btn-danger btn-sm"><i class="bx bxs-trash-alt"></i> Hapus</div>') ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </main>
@@ -168,6 +171,14 @@
         </div>
     </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datatable').DataTable();
+    });
+</script>
 
 <script>
     let arrow = document.querySelectorAll(".arrow");

@@ -100,28 +100,30 @@
 
             <a href="<?= base_url("admin/tambah_daerah") ?>"><button type="button" class="btn btn-primary"><i class='bx bx-plus-circle'></i> Tambah Data</button></a><br><br>
 
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>
-                        <center>No.</center>
-                    </th>
-                    <th>
-                        <center>Nama Puskesmas</center>
-                    </th>
-                    <th>
-                        <center>Nama Kelurahan</center>
-                    </th>
-                    <th>
-                        <center>Alamat</center>
-                    </th>
-                    <th>
-                        <center>Kode Pos</center>
-                    </th>
-                    <th width="200px">
-                        <center>Action</center>
-                    </th>
-                </tr>
-
+            <table class="table table-bordered table-striped" id="datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            <center>No.</center>
+                        </th>
+                        <th>
+                            <center>Nama Puskesmas</center>
+                        </th>
+                        <th>
+                            <center>Nama Kelurahan</center>
+                        </th>
+                        <th>
+                            <center>Alamat</center>
+                        </th>
+                        <th>
+                            <center>Kode Pos</center>
+                        </th>
+                        <th width="200px">
+                            <center>Action</center>
+                        </th>
+                    </tr>
+                </thead>    
+                <tbody>
                 <?php $no = 1;
                 foreach ($lowokwaru as $inv) : ?>
                     <tr>
@@ -136,6 +138,7 @@
                         </td>
                     </tr>
                 <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </main>
@@ -149,6 +152,15 @@
         </div>
     </div>
 </section>
+
+<!-- datatble -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datatable').DataTable();
+    });
+</script>
 
 <script>
     let arrow = document.querySelectorAll(".arrow");

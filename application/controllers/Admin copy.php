@@ -29,7 +29,7 @@ class Admin extends CI_Controller
         $wilayah['lowokwaru'] = $this->m_daerah->zkuning();
         $wilayah['lowokwaru2'] = $this->m_daerah->zmerah();
         $wilayah['lowokwaru3'] = $this->m_daerah->zhijau();
-        
+
         $wilayah['lowokwarudata'] = $this->m_daerah->data_puskesmas1();
         $wilayah['lowokwarudata1'] = $this->m_daerah->data_puskesmas2();
         $wilayah['lowokwarudata2'] = $this->m_daerah->data_puskesmas3();
@@ -55,7 +55,8 @@ class Admin extends CI_Controller
 
     // menambahkan daerah vaksinasi
 
-    public function tambah_daerah(){
+    public function tambah_daerah()
+    {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -172,12 +173,12 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('pers_vaksin_gel2', 'pers_vaksin_gel2', 'required|trims');
         $this->form_validation->set_rules('pers_vaksin_gel3', 'pers_vaksin_gel3', 'required|trims');
         if ($this->form_validation->run() == false) {
-        $data['title'] = 'Tambah Daerah Vaksinasi';
-        $wilayah['daerah'] = $this->m_daerah->get_rumahsakit();
-        $this->load->view('admin/templates/header', $data);
-        $this->load->view('admin/vaksin', $wilayah);
-        $this->load->view('admin/templates/footer');
-        }else{
+            $data['title'] = 'Tambah Daerah Vaksinasi';
+            $wilayah['daerah'] = $this->m_daerah->get_rumahsakit();
+            $this->load->view('admin/templates/header', $data);
+            $this->load->view('admin/vaksin', $wilayah);
+            $this->load->view('admin/templates/footer');
+        } else {
             $datawilayah = array(
                 'id_puskesmas' => $this->input->post('id_puskesmas'),
                 'id_kelurahan' => $this->input->post('id_kelurahan'),
@@ -363,10 +364,10 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $wilayah['data_vaksin'] =$this->db->get('data_vaksin inner join puskesmas on data_vaksin.id_puskesmas = puskesmas.id_puskesmas inner join kelurahan on data_vaksin.id_kelurahan = kelurahan.id_kelurahan');
+        $wilayah['data_vaksin'] = $this->db->get('data_vaksin inner join puskesmas on data_vaksin.id_puskesmas = puskesmas.id_puskesmas inner join kelurahan on data_vaksin.id_kelurahan = kelurahan.id_kelurahan');
         $id = "";
         $id = $this->db->query('select max(nomor) as m from hasil_centroid');
-        foreach ($id->result() as $i){
+        foreach ($id->result() as $i) {
             $id = $i->m;
         }
         $this->db->where('nomor', $id);
@@ -407,23 +408,24 @@ class Admin extends CI_Controller
         }
 
         if ($c1_sebelum == $c1_sesesudah || $c2_sebelum == $c2_sesesudah || $c2_sebelum == $c2_sesesudah) {
-        ?>
+?>
             <script>
                 alert("Proses iterasi berakhir pada tahap ke-<?php echo $it; ?>");
             </script>
-        <?php
+<?php
             echo "<meta http-equiv='refresh' content='0; url=" . base_url() . "admin/iterasi_hasil'>";
         } else {
             $datas['title'] = 'Data Daerah Vaksinasi';
             $this->load->view('admin/templates/header', $datas);
             $this->load->view('admin/tampilandatalanjut', $wilayah);
             $this->load->view('admin/templates/footer');
-        }   
+        }
     }
 
     //hasil iterasi kmeans
 
-    function iterasi_hasil(){
+    function iterasi_hasil()
+    {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -439,7 +441,8 @@ class Admin extends CI_Controller
 
     //menampilkan grafik dari hasil kmeans
 
-    public function grafik(){
+    public function grafik()
+    {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -458,7 +461,8 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/footer');
     }
 
-    public function profil(){
+    public function profil()
+    {
 
         $this->db->join('kelurahan', 'kelurahan.id_kelurahan = user.id_kelurahan');
         $this->db->join('kecamatan', 'kecamatan.id_kecamatan = user.id_kecamatan');
@@ -471,9 +475,9 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/footer');
     }
 
-    public function logo(){
+    public function logo()
+    {
         $data['title'] = 'Setting Logo';
-        $data['image'] = $this->db->get('logo')->result();
 
         $data_file['image'] = $this->db->get('logo')->result();
 
@@ -482,14 +486,16 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/footer');
     }
 
-    public function tambah_logo(){
+    public function tambah_logo()
+    {
         $nama_logo = $_FILES['nama_logo']['name'];
         $icon = $_FILES['icon']['name'];
+        if ($nama_logo) {
             $config['upload_path'] = './assets/logo/';
             $config['allowed_types'] = 'jpg|jpeg|png|gif';
             $config['max_size'] = 1000; //satuan MB
             $config['max_width'] = 1280; //pixel
-            $config['max_height'] = 900; //pixel
+            $config['max_height'] = 300; //pixel
             $this->load->library('upload', $config);
             if ($this->upload->do_upload('nama_logo')) {
                 $uploaded = $this->upload->data();
@@ -497,34 +503,47 @@ class Admin extends CI_Controller
                 // var_dump($logo_name);
                 // die();
                 $data = [
-                    'nama_logo' => $logo_name,            
+                    'nama_logo' => $logo_name,
                     'date_created' => time()
                 ];
-                
-             
-            // }else{
-              
-            // }
-                
-            // if ($this->upload->do_upload('icon')) {
-            //     $uploadeds = $this->upload->data();
-            //     $icon_name = $uploadeds['file_name'];
-            //     $datas = [
-            //         'nama_logo' => $logo_name,
-            //         'icon' => $icon_name,
-            //         'date_created' => time()
-            //     ];
 
-               
+                $this->m_daerah->tambah_logo($data);
+                $this->session->set_flashdata('status', 'Data Berhasil Disimpan');
+                redirect('admin/logo');
             } else {
                 $this->session->set_flashdata('status', $this->upload->display_errors());
                 redirect('admin/logo');
             }
-        $this->m_daerah->tambah_logo($data);
-        $this->session->set_flashdata('status', 'Data Berhasil Disimpan');
-        redirect('admin/logo');
-            
-    }
+        } else {
+            $this->session->set_flashdata('status', 'tidak ada gambar yang di upload');
+            redirect('admin/logo');
+        }
+        if ($icon) {
+            $config['upload_path'] = './assets/logo/';
+            $config['allowed_types'] = 'jpg|jpeg|png|gif';
+            $config['max_size'] = 1000; //satuan MB
+            $config['max_width'] = 1280; //pixel
+            $config['max_height'] = 300; //pixel
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('icon')) {
+                $uploadeds = $this->upload->data();
+                $icon_name = $uploadeds['file_name'];
+                // var_dump($logo_name);
+                // die();
+                $datas = [
+                    'icon' => $icon_name,
+                ];
 
-    
+                $this->m_daerah->tambah_logo($datas);
+                $this->session->set_flashdata('status', 'Data Berhasil Disimpan');
+                redirect('admin/logo');
+            } else {
+                $this->session->set_flashdata('status', $this->upload->display_errors());
+                redirect('admin/logo');
+            }
+        } else {
+            $this->session->set_flashdata('status', 'tidak ada gambar yang di upload');
+            redirect('admin/logo');
+        }
+    }
 }

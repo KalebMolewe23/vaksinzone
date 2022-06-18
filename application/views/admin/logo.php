@@ -89,59 +89,27 @@
     </div>
 
     <main>
-        <table class="table table-bordered table-striped" id="datatable">
-            <thead>
-                <tr>
-                    <th>
-                        <center>No.</center>
-                    </th>
-                    <th>
-                        <center>Nama User</center>
-                    </th>
-                    <th>
-                        <center>Role</center>
-                    </th>
-                    <th>
-                        <center>Email</center>
-                    </th>
-                    <th>
-                        <center>Alamat</center>
-                    </th>
-                    <th>
-                        <center>Kecamatan</center>
-                    </th>
-                    <th>
-                        <center>Kelurahan</center>
-                    </th>
-                    <th>
-                        <center>Kode Pos</center>
-                    </th>
-                    <!-- <th width="200px">
-                    <center>Action</center>
-                </th> -->
-                </tr>
-            </thead>
-            <tbody>
+        <?php
+        echo form_open_multipart('admin/tambah_logo');
+        foreach ($image as $img) { ?>
+            <div class="form-group">
+                <label>Upload Logo <span style="color: red;">*</span></label><br>
+                <img src="<?= base_url('assets/logo/' . $img->nama_logo); ?>" class="logo" alt="" width="150px"><br><br>
+                <input type="file" name="nama_logo" class="form-control">
+            </div>
+            <!-- <div class="form-group">
+                <label>Upload Icon <span style="color: red;">*</span></label><br>
+                <img src="<?= base_url('assets/logo/' . $img->icon); ?>" class="logo" alt="" width="50px"><br><br>
+                <input type="file" name="icon" class="form-control">
+            </div> -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" name="submit">Save</button>
+            </div>
 
-                <?php $no = 1;
-                foreach ($user as $inv) : ?>
-                    <tr>
-                        <td align="center"><?= $no++ ?></td>
-                        <td align="center"><?= $inv->nama_user ?></td>
-                        <td align="center"><?= $inv->role ?></td>
-                        <td align="center"><?= $inv->email ?></td>
-                        <td align="center"><?= $inv->alamat ?></td>
-                        <td align="center"><?= $inv->nama_kecamatan ?></td>
-                        <td align="center"><?= $inv->nama_kelurahan ?></td>
-                        <td align="center"><?= $inv->kode_pos ?></td>
-                        <!-- <td align="center">
-                        <?= anchor('admin/editdaerah/' . $inv->id_info, '<div class="btn btn-primary btn-sm"><i class="bx bx-edit" ></i> Ubah</div>') ?>
-                        <?= anchor('admin/deletedaerah/' . $inv->id_info, '<div class="btn btn-danger btn-sm"><i class="bx bxs-trash-alt"></i> Hapus</div>') ?>
-                    </td> -->
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <?php
+        }
+        echo form_close();
+        ?>
     </main>
 </section>
 
@@ -153,15 +121,6 @@
         </div>
     </div>
 </section>
-
-<!-- datatble -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#datatable').DataTable();
-    });
-</script>
 
 <script>
     let arrow = document.querySelectorAll(".arrow");
