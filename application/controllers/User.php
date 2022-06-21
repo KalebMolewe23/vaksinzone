@@ -26,6 +26,11 @@ class User extends CI_Controller {
         $wilayah['lowokwaru2'] = $this->m_daerah->zmerah();
         $wilayah['lowokwaru3'] = $this->m_daerah->zhijau();
 
+        $wilayah['bawah'] = $this->db->get('footer')->result();
+        $this->db->where('status', 1);
+        $wilayah['sosmed'] = $this->db->get('sosial_media')->result();
+        $wilayah['tentang'] = $this->db->get('about')->result();
+
         $wilayah['lowokwarumerah'] = $this->m_daerah->zmerah();
         $wilayah['vaksinm'] = $this->m_daerah->graph3();
         $wilayah['lowokwarukuning'] = $this->m_daerah->zkuning();
@@ -48,6 +53,11 @@ class User extends CI_Controller {
 
         $wilayah['image'] = $this->db->get('logo')->result();
 
+        $wilayah['bawah'] = $this->db->get('footer')->result();
+        $this->db->where('status', 1);
+        $wilayah['sosmed'] = $this->db->get('sosial_media')->result();
+        $wilayah['tentang'] = $this->db->get('about')->result();
+
         $data['title'] = 'Info Vaksinasi';
         $wilayah['lowokwaru'] = $this->m_daerah->data_puskesmas();
         $this->load->view('user/templates/header', $data);
@@ -60,6 +70,11 @@ class User extends CI_Controller {
         $this->session->userdata('email')])->row_array();
 
         $wilayah['image'] = $this->db->get('logo')->result();
+
+        $wilayah['bawah'] = $this->db->get('footer')->result();
+        $this->db->where('status', 1);
+        $wilayah['sosmed'] = $this->db->get('sosial_media')->result();
+        $wilayah['tentang'] = $this->db->get('about')->result();
 
         $data['title'] = 'Data Daerah Vaksinasi';
         $wilayah['lowokwaru'] = $this->m_daerah->zhijau();
@@ -74,31 +89,16 @@ class User extends CI_Controller {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
+        $wilayah['bawah'] = $this->db->get('footer')->result();
+        $this->db->where('status',1);
+        $wilayah['sosmed'] = $this->db->get('sosial_media')->result();
+        $wilayah['tentang'] = $this->db->get('about')->result();
+
         $wilayah['image'] = $this->db->get('logo')->result();
 
         $data['title'] = 'Tentang Website';
         $this->load->view('user/templates/header', $data);
-        $this->load->view('user/about');
-        $this->load->view('user/templates/footer');
-    }
-
-    public function grafik()
-    {
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
-
-        $data_hasil = $this->m_daerah->selectdata('hasil INNER JOIN (data_vaksin,kelurahan) on hasil.id_vaksin = data_vaksin.id_vaksin and data_vaksin.id_kelurahan=kelurahan.id_kelurahan order by d3 DESC');
-
-        $wilayah = array(
-            'data_hasil'    => $data_hasil,
-        );
-
-        $wilayah['q'] = $this->db->query('select * from centroid_temp group by iterasi');
-
-        $data['title'] = 'Grafik Vaksinasi';
-        $wilayah['vaksin'] = $this->m_daerah->graph();
-        $this->load->view('user/templates/header', $data);
-        $this->load->view('user/grafik', $wilayah);
+        $this->load->view('user/about', $wilayah);
         $this->load->view('user/templates/footer');
     }
 

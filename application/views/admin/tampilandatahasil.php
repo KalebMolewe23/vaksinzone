@@ -62,6 +62,9 @@
             <ul class="sub-menu">
                 <li><a class="link_name" href="#">Setting</a></li>
                 <li><a href="<?= base_url("admin/logo"); ?>">Logo</a></li>
+                <li><a href="<?= base_url("admin/sosmed"); ?>">Social Media</a></li>
+                <li><a href="<?= base_url("admin/about"); ?>">About</a></li>
+                <li><a href="<?= base_url("admin/footer"); ?>">Footer</a></li>
             </ul>
         </li>
         <li>

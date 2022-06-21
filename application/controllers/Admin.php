@@ -459,6 +459,8 @@ class Admin extends CI_Controller
     }
 
     public function profil(){
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
 
         $this->db->join('kelurahan', 'kelurahan.id_kelurahan = user.id_kelurahan');
         $this->db->join('kecamatan', 'kecamatan.id_kecamatan = user.id_kecamatan');
@@ -472,6 +474,9 @@ class Admin extends CI_Controller
     }
 
     public function logo(){
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
         $data['title'] = 'Setting Logo';
         $data['image'] = $this->db->get('logo')->result();
 
@@ -483,6 +488,8 @@ class Admin extends CI_Controller
     }
 
     public function tambah_logo(){
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
         $nama_logo = $_FILES['nama_logo']['name'];
         $icon = $_FILES['icon']['name'];
             $config['upload_path'] = './assets/logo/';
@@ -524,6 +531,66 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('status', 'Data Berhasil Disimpan');
         redirect('admin/logo');
             
+    }
+
+    public function sosmed(){
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $wilayah['sosmed'] = $this->db->get('sosial_media')->result();
+
+        $datas['title'] = 'Data Daerah Vaksinasi';
+        $this->load->view('admin/templates/header', $datas);
+        $this->load->view('admin/sosmed', $wilayah);
+        $this->load->view('admin/templates/footer', $datas);
+    }
+
+    public function simpan_sosmed(){
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $nama_sosmed = $this->input->post('nama_sosmed');
+        $link = $this->input->post('link');
+        $icon = $this->input->post('icon');
+        $status = $this->input->post('status');
+        $this->m_daerah->simpan_sosmed($nama_sosmed, $link, $icon, $status);
+        redirect('admin/sosmed');    
+    }
+
+    public function editsosmed($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $where = array('id_sosmed' => $id);
+        $ewilayah['sosmed'] = $this->m_daerah->edit_sosmed($where, 'sosial_media')->result();
+        redirect('admin/sosmed'); 
+    }
+
+    public function about()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $wilayah['tentang'] = $this->db->get('about')->result();
+
+        $datas['title'] = 'Data Daerah Vaksinasi';
+        $this->load->view('admin/templates/header', $datas);
+        $this->load->view('admin/about', $wilayah);
+        $this->load->view('admin/templates/footer', $datas);
+    }
+
+    public function footer()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $wilayah['bawah'] = $this->db->get('footer')->result();
+
+        $datas['title'] = 'Data Daerah Vaksinasi';
+        $this->load->view('admin/templates/header', $datas);
+        $this->load->view('admin/footer', $wilayah);
+        $this->load->view('admin/templates/footer', $datas);
     }
 
     

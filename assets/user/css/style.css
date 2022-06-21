@@ -578,6 +578,20 @@ footer .copyright {
     padding: 14px;
 }
 
+#about-head{
+    display: flex;
+    align-items: center;
+}
+
+#about-head img{
+    width: 50%;
+    height: auto;
+}
+
+#about-head div{
+    padding-left: 40px;
+}
+
 #page-header h2,
 #page-header p {
     color: #fff;

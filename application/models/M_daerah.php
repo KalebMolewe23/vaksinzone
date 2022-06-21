@@ -207,4 +207,14 @@ class M_daerah extends CI_Model
         $this->db->update('logo',$data);
     }
 
+    function simpan_sosmed($nama_sosmed, $link, $icon, $status)
+    {
+        $save = $this->db->query("INSERT INTO sosial_media (nama_sosmed,link,icon,status) VALUES ('$nama_sosmed','$link','$icon','$status')");
+        return $save;
+    }
+
+    public function edit_sosmed($where,$table){
+        return  $this->db->get_where($table,$where);
+    }
+
 }

@@ -8,7 +8,7 @@
             <li><a class="active" href="<?= base_url("user"); ?>"><strong>Home</strong></a></li>
             <li><a href="<?= base_url("user/daerah_vaksinasi"); ?>"><strong>Puskesmas</strong></a></li>
             <li><a href="<?= base_url("user/tampilan_data"); ?>"><strong>Vaksinasi</strong></a></li>
-            <li><a href="<?= base_url("home/about"); ?>"><strong>Tentang Kami</strong></a></li>
+            <li><a href="<?= base_url("user/about"); ?>"><strong>Tentang Kami</strong></a></li>
             <li><a href="<?= base_url("auth/logout"); ?>"><strong>Keluar</strong></a>
                 <a href="#" id="close"><i class="fas fa-times"></i></a>
         </ul>

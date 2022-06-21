@@ -7,7 +7,7 @@
             <li><a href="<?= base_url("user"); ?>"><strong>Home</strong></a></li>
             <li><a class="active" href="<?= base_url("user/daerah_vaksinasi"); ?>"><strong>Puskesmas</strong></a></li>
             <li><a href="<?= base_url("user/tampilan_data"); ?>"><strong>Vaksinasi</strong></a></li>
-            <li><a href="<?= base_url("home/about"); ?>"><strong>Tentang Kami</strong></a></li>
+            <li><a href="<?= base_url("user/about"); ?>"><strong>Tentang Kami</strong></a></li>
             <li><a href="<?= base_url("auth/logout"); ?>"><strong>Keluar</strong></a>
                 <a href="#" id="close"><i class="fas fa-times"></i></a>
         </ul>
@@ -41,7 +41,8 @@
     <a href="<?= base_url("user/print_info_vaksin") ?>"><button class="btn btn-success" type="button"><i class="fa fa-print" aria-hidden="true"></i> Print</button></a>
     <br><br>
 
-    <table class="table table-bordered table_hover table-striped">
+    <table class="table table-bordered table_hover table-striped" id="datatable">
+        <thead>
         <tr>
             <th>
                 <center>No.</center>
@@ -59,7 +60,8 @@
                 <center>Kode Pos</center>
             </th>
         </tr>
-
+        </thead>
+        <tbody>
         <?php $no = 1;
         foreach ($lowokwaru as $inv) : ?>
             <tr>
@@ -70,6 +72,7 @@
                 <td align="center"><?= $inv->kode_pos ?></td>
             </tr>
         <?php endforeach; ?>
+        </tbody>
     </table>
 </section>
 
@@ -115,4 +118,13 @@
     $(document).ready(function() {
         $(".preloader").fadeOut();
     })
+</script>
+
+<!-- datatble -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datatable').DataTable();
+    });
 </script>
